@@ -13,3 +13,6 @@ class post(models.Model):
     publish_date= models.DateTimeField(null=True)
     created_date= models.DateTimeField(auto_now_add=True,null=True)
     update_date= models.DateTimeField(auto_now=True,null=True)
+
+    def __str__(self):
+        return f"{self.titel} - {self.id}"
