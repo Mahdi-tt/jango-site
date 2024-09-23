@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='post',
             name='created_date',
-            field=models.DateTimeField(auto_now_add=True, default=1),
+            field=models.DateTimeField(auto_now_add=True),
             preserve_default=False,
         ),
         migrations.AlterField(
@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='post',
             name='update_date',
-            field=models.DateTimeField(auto_now=True, default=1),
+            field=models.DateTimeField(auto_now=True),
             preserve_default=False,
         ),
     ]

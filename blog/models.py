@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 # Create your models here.
 class post(models.Model):
     # author
@@ -10,9 +10,11 @@ class post(models.Model):
     # categore
     cuntent_view=models.IntegerField(default=0)
     status= models.BooleanField(default= False)
-    publish_date= models.DateTimeField(null=True)
-    created_date= models.DateTimeField(auto_now_add=True,null=True)
-    update_date= models.DateTimeField(auto_now=True,null=True)
+    publish_date= models.DateTimeField(default=timezone.now)
+    created_date= models.DateTimeField(auto_now_add=True)
+    update_date= models.DateTimeField(auto_now=True)
+    class Meta:
+        ordering = ['publish_date']
 
     def __str__(self):
-        return f"{self.titel} - {self.id}"
+        return f"{self.titel} "
