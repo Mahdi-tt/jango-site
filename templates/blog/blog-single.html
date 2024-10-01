@@ -99,7 +99,7 @@
 										<div class="detials">
 											{% if next_post %}
 											<p>Next Post</p>
-											<a href=""><h4>{{next_post.titel}}</h4></a>
+											<a href="{% url 'blog:blog_single' next_post.id %}"><h4>{{next_post.titel}}</h4></a>
 										</div>
 										<div class="arrow">
 											<a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
