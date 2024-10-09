@@ -24,6 +24,11 @@ def blog_single(request,pid):
              'back_post':back_post}
     return render(request,'blog/blog-single.html',context)
 
-def test(request,name,lname,age):
-    context={'name':name,'lname':lname, 'age':age}
-    return render(request,'test.html',context)
+def blog_category(request, cat_name):
+    posts= post.objects.filter(status=1)
+    p=posts.filter(categore__name=cat_name)
+    context={'posts':p}
+    return render(request,'blog/blog-home.html',context)
+
+def test(request):
+    return render(request,'test.html')
