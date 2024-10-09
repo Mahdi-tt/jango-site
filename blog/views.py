@@ -1,11 +1,16 @@
 from django.shortcuts import render , get_object_or_404
 from blog.models import post
 from django.utils import timezone
-def blog_home(request):
+def blog_home(request,cat_name=None,author_username=None):
     now= timezone.now()
     posts = post.objects.filter(publish_date__lte=now,status=1)
+    if cat_name:
+        posts=posts.filter(categore__name=cat_name)
+    if author_username:
+        posts=posts.filter(author__username=author_username)
     context={'posts':posts}
     return render(request,'blog/blog-home.html',context)
+
 def blog_single(request,pid):
     now= timezone.now()
     posts=get_object_or_404(post,pk=pid,status=1,publish_date__lte=now)
@@ -29,6 +34,13 @@ def blog_category(request, cat_name):
     p=posts.filter(categore__name=cat_name)
     context={'posts':p}
     return render(request,'blog/blog-home.html',context)
-
+def blog_search(request):
+    posts=post.objects.filter(status=1)
+    if request.method == 'GET':
+        if s := request.GET.get('search'):
+            posts=posts.filter(content__contains=s)
+    context={'posts':posts}
+    return render(request,'blog/blog-home.html',context)   
+    
 def test(request):
     return render(request,'test.html')
