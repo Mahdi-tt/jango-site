@@ -7,18 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-<h1>test: {% posts as totalpost %}
-    {% for p in totalpost %}
-        <p>{{p.content|filter}} </p>
-    {%endfor%}
-    
-    {% pupilarpost %}
-
-</h1>
-    <!-- {% for post in posts %}
-        <h1>{{post.titel}}</h1>
-        <p>{{post.content}}</p>
-        <main>{{post.publish_date}}</main>
-    {%endfor%} -->
+    <form action="{% url 'blog:test' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+    </form>
 </body>
 </html>

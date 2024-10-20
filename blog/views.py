@@ -1,6 +1,11 @@
 from django.shortcuts import render , get_object_or_404
+from django.http import *
+from django.core.paginator import Paginator , PageNotAnInteger , EmptyPage
 from blog.models import post
 from django.utils import timezone
+
+from website.forms import contactforms
+
 def blog_home(request,cat_name=None,author_username=None):
     now= timezone.now()
     posts = post.objects.filter(publish_date__lte=now,status=1)
@@ -8,6 +13,15 @@ def blog_home(request,cat_name=None,author_username=None):
         posts=posts.filter(categore__name=cat_name)
     if author_username:
         posts=posts.filter(author__username=author_username)
+    paginat= Paginator(posts,2)
+    page_number=request.GET.get("page")
+    try:
+        posts= paginat.get_page(page_number)
+    except PageNotAnInteger :
+        posts = paginat.get_page(1)
+    except EmptyPage :
+        posts = paginat.get_page(1) 
+
     context={'posts':posts}
     return render(request,'blog/blog-home.html',context)
 
@@ -43,4 +57,14 @@ def blog_search(request):
     return render(request,'blog/blog-home.html',context)   
     
 def test(request):
-    return render(request,'test.html')
+    if request.method == 'POST':
+        form = contactforms(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect ("done")
+        
+        elif request.method== 'GET':
+            print('get')
+    else:
+        form=contactforms
+    return render(request,'test.html',{'form':form})
