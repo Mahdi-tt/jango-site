@@ -6,7 +6,7 @@ class contactforms(forms.ModelForm):
 
     class Meta():
         model= contact
-        exclude = ["subject"]
+        fields = '__all__'
 
 class Newsletterforms(forms.ModelForm):
      
