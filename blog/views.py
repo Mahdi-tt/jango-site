@@ -38,6 +38,7 @@ def blog_single(request,pid):
         back_post=None
     if next_post and next_post.status != 1:
         next_post=None
+
     context={'posts':posts,
              'next_post':next_post,
              'back_post':back_post}
