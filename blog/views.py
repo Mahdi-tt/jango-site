@@ -6,13 +6,15 @@ from django.utils import timezone
 
 from website.forms import contactforms
 
-def blog_home(request,cat_name=None,author_username=None):
+def blog_home(request,cat_name=None,author_username=None,tag_name=None):
     now= timezone.now()
     posts = post.objects.filter(publish_date__lte=now,status=1)
     if cat_name:
         posts=posts.filter(categore__name=cat_name)
     if author_username:
         posts=posts.filter(author__username=author_username)
+    if tag_name:
+       posts=posts.filter(tag_name__name=tag_name)
     paginat= Paginator(posts,2)
     page_number=request.GET.get("page")
     try:
@@ -21,7 +23,6 @@ def blog_home(request,cat_name=None,author_username=None):
         posts = paginat.get_page(1)
     except EmptyPage :
         posts = paginat.get_page(1) 
-
     context={'posts':posts}
     return render(request,'blog/blog-home.html',context)
 
