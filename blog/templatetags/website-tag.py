@@ -10,8 +10,8 @@ def lates_post(arg=3):
     posts=post.objects.filter(status=1,publish_date__lte=now).order_by('-publish_date')
     cat= categor.objects.all()
     cat_dict = {}
-    for i in cat:
-        p=posts.filter(categore = i )
-        cat_dict[i] = p
+    for name in cat:
+        cat_dict[name]=posts.filter(categore = name )
+        
     
     return {'posts': posts[:arg], 'category': cat_dict}

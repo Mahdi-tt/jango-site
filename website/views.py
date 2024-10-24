@@ -16,6 +16,7 @@ def contact(request):
             messages.error(request,'error ticket')
     form=contactforms()
     return render(request,'website/contact.html',{'form':form})
+
 def index(request):
     return render(request,'website/index.html')
 def about(request):

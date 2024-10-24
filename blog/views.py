@@ -14,7 +14,7 @@ def blog_home(request,cat_name=None,author_username=None,tag_name=None):
     if author_username:
         posts=posts.filter(author__username=author_username)
     if tag_name:
-       posts=posts.filter(tag_name__name=tag_name)
+       posts=posts.filter(tags__name=tag_name)
     paginat= Paginator(posts,2)
     page_number=request.GET.get("page")
     try:

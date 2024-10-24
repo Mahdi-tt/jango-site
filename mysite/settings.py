@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'robots',
     'debug_toolbar',
     'taggit',
+    'django_summernote',
+    'captcha',
 ]
 
 # sitest frameworks
@@ -53,6 +55,12 @@ SITE_ID = 2
 #robots 
 ROBOTS_USE_SITEMAP = False
 ROBOTS_USE_HOST = False
+
+# summernote 
+# SUMMERNOTE_THEME = 'bs4'
+X_FRAME_OPTIONS = "SAMEORIGIN"
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
