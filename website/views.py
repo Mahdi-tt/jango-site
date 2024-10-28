@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import *
 from .forms import *
 from .models import contact
+from blog.models import post
 from django.contrib import messages
 
 def contact(request):
@@ -18,6 +19,8 @@ def contact(request):
     return render(request,'website/contact.html',{'form':form})
 
 def index(request):
+    posts = post.objects.filter(status=1)[:3]
+    context = {'posts': posts}
     return render(request,'website/index.html')
 def about(request):
     return render(request,'website/about.html')

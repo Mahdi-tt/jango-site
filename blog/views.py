@@ -1,7 +1,7 @@
 from django.shortcuts import render , get_object_or_404
 from django.http import *
 from django.core.paginator import Paginator , PageNotAnInteger , EmptyPage
-from blog.models import post
+from blog.models import post ,comment
 from django.utils import timezone
 
 from website.forms import contactforms
@@ -39,10 +39,12 @@ def blog_single(request,pid):
         back_post=None
     if next_post and next_post.status != 1:
         next_post=None
+    commets = comment.objects.filter(post=posts.id,approved=True)
 
     context={'posts':posts,
              'next_post':next_post,
-             'back_post':back_post}
+             'back_post':back_post,
+             'comments':commets}
     return render(request,'blog/blog-single.html',context)
 
 def blog_category(request, cat_name):

@@ -26,7 +26,23 @@ class post(models.Model):
         ordering = ['publish_date']
 
     def __str__(self):
-        return f"{self.titel} "
+        return self.titel
     
     def get_absolute_url(self):
         return reverse("blog:blog_single", kwargs={'pid':self.id})
+
+class comment(models.Model):
+    post = models.ForeignKey(post, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255)
+    subject = models.CharField(max_length= 255,null=True, blank=True)
+    massage = models.CharField(max_length=255)
+    approved = models.BooleanField(default=False)
+    created_date = models.DateField(auto_now_add=True)
+    update_date = models.DateField(auto_now=True)
+    
+    class Meta:
+        ordering =['-created_date']
+
+    def __str__(self) -> str:
+        return self.name

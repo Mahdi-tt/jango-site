@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'taggit',
     'django_summernote',
     'captcha',
+
 ]
 
 # sitest frameworks
@@ -59,6 +61,12 @@ ROBOTS_USE_HOST = False
 # summernote 
 # SUMMERNOTE_THEME = 'bs4'
 X_FRAME_OPTIONS = "SAMEORIGIN"
+
+#simpale capcha admin
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
+
 
 
 
