@@ -22,7 +22,7 @@
                             <ul>
                                 
                                 <li>
-                                    <a href="{% url 'blog:blog_category' cat_name=name %}">{{p.categore.name}}</a>
+                                    <a href="{% url 'blog:blog_category' cat_name=p.categore.name %}">{{p.categore.name}}</a>
                                 </li>
                               
 				
@@ -30,7 +30,7 @@
                         </div>
                         <a href="{% url 'blog:blog_single' pid=p.id %}"><h4 class="title">{{p.titel}}</h4></a>
                         <p>
-                           {{p.content|filter}}
+                           {{p.content|filter|safe}}
                         </p>
                         <h6 class="date">{{p.publish_date|date:"o/m/d"}}</h6>
                     </div>	
