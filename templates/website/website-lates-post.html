@@ -19,14 +19,14 @@
                     </div>
                     <div class="details">
                         <div class="tags">
+                            {% for cat in p.categore.all %}
                             <ul>
-                                
                                 <li>
-                                    <a href="{% url 'blog:blog_category' cat_name=p.categore.name %}">{{p.categore.name}}</a>
+                                    <a href="{% url 'blog:blog_category' cat_name=cat.name %}">{{cat.name}}</a>
                                 </li>
-                              
-				
+
                             </ul>
+                            {% endfor %}
                         </div>
                         <a href="{% url 'blog:blog_single' pid=p.id %}"><h4 class="title">{{p.titel}}</h4></a>
                         <p>

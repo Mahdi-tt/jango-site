@@ -19,9 +19,7 @@ def contact(request):
     return render(request,'website/contact.html',{'form':form})
 
 def index(request):
-    posts = post.objects.filter(status=1)
-    context = {'posts': posts}
-    return render(request,'website/index.html',context)
+    return render(request,'website/index.html')
 def about(request):
     return render(request,'website/about.html')
 
