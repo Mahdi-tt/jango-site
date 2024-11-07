@@ -2,9 +2,12 @@ from django.urls import path
 from blog.views import blog_home
 from blog.views import blog_single , blog_category ,blog_search
 from blog.views import test
+from blog.feeds import LatestEntriesFeed
+
 
 app_name='blog'
 urlpatterns = [
+    path("rss/feed/", LatestEntriesFeed()),
     path('',blog_home,name='blog_home'),
     path('<int:pid>/',blog_single,name='blog_single'),
     path('category/<str:cat_name>/',blog_home,name='blog_category'),

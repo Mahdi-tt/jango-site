@@ -40,8 +40,12 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-sm-6 col-6 header-top-left">
                         <ul>
-                            <li><a href="#">Visit Us</a></li>
-                            <li><a href="#">Buy Tickets</a></li>
+                        {% if request.user.is_authenticated %}
+                            <li><a href="#"> {{request.user.username}} </a></li>
+                            <li><a href="{% url 'accounts:logout_view' %}"> logout </a></li>
+                        {% else %}
+                            <li><a href="{% url 'accounts:login_view' %}">Login</a></li>    
+                        {% endif %}
                         </ul>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-6 header-top-right">
@@ -79,7 +83,7 @@
                         <li><a href="{% url 'website:contact'%}">Contact</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
-                <!-- #pop up notification -->
+                <!-- #popup notification -->
                         {% if messages %}
                         {% for message in messages %}
                         <div class="alert alert-dismissible alert-success">
@@ -90,7 +94,7 @@
                         </div>
                     {% endfor %}
                     {% endif %}
-                <!-- # pop up notification end -->
+                <!-- # popup notification end -->
             </div>
         </div>
     </header><!-- #header -->

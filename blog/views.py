@@ -3,8 +3,9 @@ from django.http import *
 from django.core.paginator import Paginator , PageNotAnInteger , EmptyPage
 from blog.models import post ,comment
 from django.utils import timezone
-
+from blog.forms import commentforms
 from website.forms import contactforms
+from django.contrib import messages
 
 def blog_home(request,cat_name=None,author_username=None,tag_name=None):
     now= timezone.now()
@@ -27,6 +28,14 @@ def blog_home(request,cat_name=None,author_username=None,tag_name=None):
     return render(request,'blog/blog-home.html',context)
 
 def blog_single(request,pid):
+    if request.method =="POST":
+        form= commentforms(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"comments success")
+        else:
+            messages.error(request,"comments error")
+    form = commentforms()        
     now= timezone.now()
     posts=get_object_or_404(post,pk=pid,status=1,publish_date__lte=now)
     posts.cuntent_view +=1
@@ -44,7 +53,8 @@ def blog_single(request,pid):
     context={'posts':posts,
              'next_post':next_post,
              'back_post':back_post,
-             'comments':commets}
+             'comments':commets,
+             'form':form}
     return render(request,'blog/blog-single.html',context)
 
 def blog_category(request, cat_name):
