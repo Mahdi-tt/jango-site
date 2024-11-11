@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import redirect
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm , UserCreationForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
@@ -24,6 +24,7 @@ def login_view(request):
             else:
                 messages.error(request,'error to login')
     else:
+        messages.error(request,'you are login')
         return redirect('/')
     form = AuthenticationForm()
     context = {'form': form}
@@ -37,4 +38,19 @@ def logout_view(request):
     return redirect('/')
 
 def signup_view(request):
-    return render(request,'Accounts/signup.html')
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            form = UserCreationForm(request.POST)
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request,'success creat user')
+                return redirect('/accounts/login')
+            else:
+                messages.error(request,form.errors.as_text()) #.replace("* This field is required","error").replace("password1","password").replace("password2","Confirm password")
+    else:
+        messages.error(request,'you are login')
+        return redirect('/')        
+    form = UserCreationForm()
+    context = {'form':form} 
+    return render(request,'Accounts/signup.html',context)

@@ -38,16 +38,21 @@
         <div class="header-top">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-6 col-sm-6 col-6 header-top-left">
+                 <div class="col-lg-6 col-sm-6 col-6 header-top-left">
                         <ul>
                         {% if request.user.is_authenticated %}
                             <li><a href="#"> {{request.user.username}} </a></li>
-                            <li><a href="{% url 'accounts:logout_view' %}"> logout </a></li>
+                            {% csrf_token %}
+                            <li><a href="{% url 'logout' %}" method="post"> logout </a></li>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit">logout</button>
+                            </form>
                         {% else %}
-                            <li><a href="{% url 'accounts:login_view' %}">Login</a></li>    
+                            <li><a href="accounts/login">Login</a></li>    
                         {% endif %}
                         </ul>
-                    </div>
+                    </div> 
                     <div class="col-lg-6 col-sm-6 col-6 header-top-right">
                         <div class="header-social">
                             <a href="#"><i class="fa fa-facebook"></i></a>

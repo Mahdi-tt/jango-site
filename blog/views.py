@@ -6,6 +6,7 @@ from django.utils import timezone
 from blog.forms import commentforms
 from website.forms import contactforms
 from django.contrib import messages
+from django.shortcuts import redirect
 
 def blog_home(request,cat_name=None,author_username=None,tag_name=None):
     now= timezone.now()
@@ -34,7 +35,9 @@ def blog_single(request,pid):
             form.save()
             messages.success(request,"comments success")
         else:
-            messages.error(request,"comments error")
+            messages.error(request,f"erorre {form.errors.as_text()}")
+  
+    
     form = commentforms()        
     now= timezone.now()
     posts=get_object_or_404(post,pk=pid,status=1,publish_date__lte=now)
@@ -48,7 +51,9 @@ def blog_single(request,pid):
         back_post=None
     if next_post and next_post.status != 1:
         next_post=None
+    
     commets = comment.objects.filter(post=posts.id,approved=True)
+
 
     context={'posts':posts,
              'next_post':next_post,
