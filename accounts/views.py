@@ -33,13 +33,13 @@ def login_view(request):
 
 @login_required
 def logout_view(request):
-    messages.error(request,'you are not login')
     logout(request)
     return redirect('/')
 
 def signup_view(request):
     if not request.user.is_authenticated:
         if request.method == 'POST':
+            print('@@@@@@')
             form = UserCreationForm(request.POST)
             form = UserCreationForm(request.POST)
             if form.is_valid():
@@ -47,7 +47,7 @@ def signup_view(request):
                 messages.success(request,'success creat user')
                 return redirect('/accounts/login')
             else:
-                messages.error(request,form.errors.as_text()) #.replace("* This field is required","error").replace("password1","password").replace("password2","Confirm password")
+                messages.error(request,form.errors.as_text())
     else:
         messages.error(request,'you are login')
         return redirect('/')        

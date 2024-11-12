@@ -43,13 +43,9 @@
                         {% if request.user.is_authenticated %}
                             <li><a href="#"> {{request.user.username}} </a></li>
                             {% csrf_token %}
-                            <li><a href="{% url 'logout' %}" method="post"> logout </a></li>
-                            <form method="post" action="{% url 'logout' %}">
-                                {% csrf_token %}
-                                <button type="submit">logout</button>
-                            </form>
+                            <li><a href="{% url 'accounts:logout_view' %}" method="post"> logout </a></li>
                         {% else %}
-                            <li><a href="accounts/login">Login</a></li>    
+                            <li><a href="{% url  'accounts:login_view' %}">Login</a></li>    
                         {% endif %}
                         </ul>
                     </div> 
