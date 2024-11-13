@@ -44,8 +44,9 @@
                             <li><a href="#"> {{request.user.username}} </a></li>
                             {% csrf_token %}
                             <li><a href="{% url 'accounts:logout_view' %}" method="post"> logout </a></li>
-                        {% else %}
+                            {% else %}
                             <li><a href="{% url  'accounts:login_view' %}">Login</a></li>    
+                            <li><a href="{% url 'accounts:signup_view' %}" method="post"> signup </a></li>
                         {% endif %}
                         </ul>
                     </div> 
