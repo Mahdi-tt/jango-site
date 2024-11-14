@@ -60,6 +60,6 @@ def signup_view(request):
     else:
         messages.error(request,'you are login')
         return redirect('/')        
-    form = UserCreationForm()
+    form = customcreatuserform()
     context = {'form':form} 
     return render(request,'Accounts/signup.html',context)
