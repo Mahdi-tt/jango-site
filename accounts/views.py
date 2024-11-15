@@ -13,16 +13,13 @@ from django.contrib.auth.models import User
 def login_view(request):
     if not request.user.is_authenticated:
         if request.method == 'POST':
-            form = AuthenticationForm(request=request, data=request.POST)  
-            if form.is_valid():
-                print('WWWWWWWW')
-                username = form.cleaned_data.get('username')
-                password = form.cleaned_data.get('password') 
+            # form = AuthenticationForm(request=request, data=request.POST)  
+            # if form.is_valid():
+                username = request.POST.get('username')
+                password = request.POST.get('password') 
                 if '@' in username:
-                    print('@@@@@@@@')
                     user_obj = User.objects.filter(email = username).first()
                 else:
-                    print("$$$$$$$")
                     user_obj = User.objects.filter(username = username).first()       
                 if user_obj:
                     user = authenticate(request, username=user_obj.username, password=password)
@@ -30,10 +27,10 @@ def login_view(request):
                         login(request, user)
                         messages.success(request,'SUCCESS to login')
                         return redirect('/')
+                    else:
+                        messages.error(request,'errore to password')
                 else:
-                    messages.error(request,form.errors)
-            else:
-                messages.error(request,form.errors)#'error to login '
+                    messages.error(request,'errore to user name ')
     else:
         messages.error(request,'you are login')
         return redirect('/')
