@@ -48,4 +48,4 @@ EMAIL_PORT = 587
 
 EMAIL_HOST_USER = "blogofficiall9@gmail.com"
 
-EMAIL_HOST_PASSWORD = "blog_site@123"
+EMAIL_HOST_PASSWORD = "kkvs jzgr alve lixm"
