@@ -21,23 +21,28 @@ from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from website.sitemaps import StaticViewSitemap
 from blog.sitemaps import BlogSitemap
+from django.http import HttpResponse
 from debug_toolbar.toolbar import debug_toolbar_urls
 
 sitemaps = {
     "static": StaticViewSitemap,
     "blog" : BlogSitemap
 }
+
+def comming_soon(request):
+   return HttpResponse('<h1>به زودی در دسترس خواهد بود</h1>')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('website.url')),
-    path('blog/',include('blog.urls')),
-    path('accounts/',include('accounts.urls')),
-    path('accounts/',include('django.contrib.auth.urls')),
-    path("sitemap.xml",sitemap,{"sitemaps": sitemaps},
-        name="django.contrib.sitemaps.views.sitemap",),
-    path('robots.txt', include('robots.urls')),
-    path('summernote/', include('django_summernote.urls')),
-    path('captcha/', include('captcha.urls')),
+    path('',comming_soon),#include('website.url')
+    # path('blog/',include('blog.urls')),
+    # path('accounts/',include('accounts.urls')),
+    # path('accounts/',include('django.contrib.auth.urls')),
+    # path("sitemap.xml",sitemap,{"sitemaps": sitemaps},
+    #     name="django.contrib.sitemaps.views.sitemap",),
+    # path('robots.txt', include('robots.urls')),
+    # path('summernote/', include('django_summernote.urls')),
+    # path('captcha/', include('captcha.urls')),
 
 ]+ debug_toolbar_urls()
 
