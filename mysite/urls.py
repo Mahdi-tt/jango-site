@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path , re_path
 from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
@@ -33,16 +33,17 @@ def comming_soon(request):
    return HttpResponse('<h1>به زودی در دسترس خواهد بود</h1>')
 
 urlpatterns = [
+    re_path('',comming_soon),
     path('admin/', admin.site.urls),
-    path('',comming_soon),#include('website.url')
-    # path('blog/',include('blog.urls')),
-    # path('accounts/',include('accounts.urls')),
-    # path('accounts/',include('django.contrib.auth.urls')),
-    # path("sitemap.xml",sitemap,{"sitemaps": sitemaps},
-    #     name="django.contrib.sitemaps.views.sitemap",),
-    # path('robots.txt', include('robots.urls')),
-    # path('summernote/', include('django_summernote.urls')),
-    # path('captcha/', include('captcha.urls')),
+    path('',include('website.url')),
+    path('blog/',include('blog.urls')),
+    path('accounts/',include('accounts.urls')),
+    path('accounts/',include('django.contrib.auth.urls')),
+    path("sitemap.xml",sitemap,{"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.sitemap",),
+    path('robots.txt', include('robots.urls')),
+    path('summernote/', include('django_summernote.urls')),
+    path('captcha/', include('captcha.urls')),
 
 ]+ debug_toolbar_urls()
 
