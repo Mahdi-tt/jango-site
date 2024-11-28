@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'captcha',
     'accounts.apps.AccountsConfig',
+    'compressor',
 
 
 
@@ -143,3 +144,9 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)

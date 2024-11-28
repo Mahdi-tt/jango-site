@@ -33,7 +33,7 @@ def comming_soon(request):
    return HttpResponse('<h1>به زودی در دسترس خواهد بود</h1>')
 
 urlpatterns = [
-    re_path('',comming_soon),
+    # re_path('',comming_soon),
     path('admin/', admin.site.urls),
     path('',include('website.url')),
     path('blog/',include('blog.urls')),
