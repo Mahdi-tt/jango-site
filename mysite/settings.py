@@ -150,3 +150,4 @@ STATICFILES_FINDERS = (
     # other finders..
     'compressor.finders.CompressorFinder',
 )
+COMPRESS_ENABLED = True
