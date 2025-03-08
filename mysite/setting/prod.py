@@ -35,4 +35,4 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = []
+
