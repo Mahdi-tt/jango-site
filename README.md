@@ -1,1 +1,1 @@
-Django and html/css website shop
+Django and html/css website blog
