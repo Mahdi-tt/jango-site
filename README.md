@@ -1,1 +1,1 @@
-first site me
+Django and html/css website shop
